@@ -474,7 +474,7 @@ public class EmojiParserTest {
     String result = EmojiParser.parseToUnicode(str);
 
     // THEN
-    assertEquals("Let's test the *⃣ emoji and its other alias *⃣", result);
+    assertEquals("Let's test the *️⃣ emoji and its other alias *️⃣", result);
   }
 
   @Test
