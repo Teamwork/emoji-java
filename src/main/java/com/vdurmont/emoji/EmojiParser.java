@@ -51,6 +51,7 @@ public class EmojiParser {
     String input,
     final FitzpatrickAction fitzpatrickAction
   ) {
+    input = input.replaceAll("\ufe0f", "");
     EmojiTransformer emojiTransformer = new EmojiTransformer() {
       public String transform(UnicodeCandidate unicodeCandidate) {
         switch (fitzpatrickAction) {
@@ -87,6 +88,7 @@ public class EmojiParser {
    * @return the string with replaced character
    */
   public static String replaceAllEmojis(String str, final String replacementString) {
+    str = str.replaceAll("\ufe0f", "");
     EmojiParser.EmojiTransformer emojiTransformer = new EmojiParser.EmojiTransformer() {
       public String transform(EmojiParser.UnicodeCandidate unicodeCandidate) {
         return replacementString;
@@ -111,6 +113,7 @@ public class EmojiParser {
    * their unicode.
    */
   public static String parseToUnicode(String input) {
+    input = input.replaceAll("\ufe0f", "");
     StringBuilder sb = new StringBuilder(input.length());
 
     for (int last = 0; last < input.length(); last++) {
@@ -229,6 +232,7 @@ public class EmojiParser {
     String input,
     final FitzpatrickAction fitzpatrickAction
   ) {
+    input = input.replaceAll("\ufe0f", "");
     EmojiTransformer emojiTransformer = new EmojiTransformer() {
       public String transform(UnicodeCandidate unicodeCandidate) {
         switch (fitzpatrickAction) {
@@ -284,6 +288,7 @@ public class EmojiParser {
     String input,
     final FitzpatrickAction fitzpatrickAction
   ) {
+    input = input.replaceAll("\ufe0f", "");
     EmojiTransformer emojiTransformer = new EmojiTransformer() {
       public String transform(UnicodeCandidate unicodeCandidate) {
         switch (fitzpatrickAction) {
@@ -309,6 +314,7 @@ public class EmojiParser {
    * @return the string without any emoji
    */
   public static String removeAllEmojis(String str) {
+    str = str.replaceAll("\ufe0f", "");
     EmojiTransformer emojiTransformer = new EmojiTransformer() {
       public String transform(UnicodeCandidate unicodeCandidate) {
         return "";
@@ -331,6 +337,7 @@ public class EmojiParser {
     String str,
     final Collection<Emoji> emojisToRemove
   ) {
+    str = str.replaceAll("\ufe0f", "");
     EmojiTransformer emojiTransformer = new EmojiTransformer() {
       public String transform(UnicodeCandidate unicodeCandidate) {
         if (!emojisToRemove.contains(unicodeCandidate.getEmoji())) {
@@ -356,6 +363,7 @@ public class EmojiParser {
     String str,
     final Collection<Emoji> emojisToKeep
   ) {
+    str = str.replaceAll("\ufe0f", "");
     EmojiTransformer emojiTransformer = new EmojiTransformer() {
       public String transform(UnicodeCandidate unicodeCandidate) {
         if (emojisToKeep.contains(unicodeCandidate.getEmoji())) {
@@ -383,6 +391,7 @@ public class EmojiParser {
     String input,
     EmojiTransformer transformer
   ) {
+    input = input.replaceAll("\ufe0f", "");
     int prev = 0;
     StringBuilder sb = new StringBuilder(input.length());
     List<UnicodeCandidate> replacements = getUnicodeCandidates(input);
@@ -526,7 +535,7 @@ public class EmojiParser {
     }
 
     public int getEmojiEndIndex() {
-      return startIndex + emoji.getUnicode().length();
+      return startIndex + emoji.getUnicodeWithoutVariationSelectors().length();
     }
 
     public int getFitzpatrickEndIndex() {

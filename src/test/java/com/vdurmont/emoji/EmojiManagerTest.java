@@ -204,6 +204,18 @@ public class EmojiManagerTest {
   }
 
   @Test
+  public void isOnlyEmojis_for_emojis_with_fe0f_returns_true() {
+    // GIVEN
+    String str = "😀️😀";
+
+    // WHEN
+    boolean isEmoji = EmojiManager.isOnlyEmojis(str);
+
+    // THEN
+    assertTrue(isEmoji);
+  }
+
+  @Test
   public void isOnlyEmojis_for_random_string_returns_false() {
     // GIVEN
     String str = "😀a";

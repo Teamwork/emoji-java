@@ -17,6 +17,7 @@ public class Emoji {
   private final List<String> aliases;
   private final List<String> tags;
   private final String unicode;
+  private final String unicodeWithoutVariationSelectors;
   private final String htmlDec;
   private final String htmlHex;
 
@@ -44,6 +45,7 @@ public class Emoji {
     int count = 0;
     try {
       this.unicode = new String(bytes, "UTF-8");
+      this.unicodeWithoutVariationSelectors = this.unicode.replaceAll("\ufe0f", "");
       int stringLength = getUnicode().length();
       String[] pointCodes = new String[stringLength];
       String[] pointCodesHex = new String[stringLength];
@@ -142,6 +144,15 @@ public class Emoji {
       return this.getUnicode();
     }
     return this.getUnicode() + fitzpatrick.unicode;
+  }
+
+  /**
+   * Returns the normalized unicode representation of the emoji
+   *
+   * @return the normalized unicode representation
+   */
+  public String getUnicodeWithoutVariationSelectors() {
+    return this.unicodeWithoutVariationSelectors;
   }
 
   /**
